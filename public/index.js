@@ -13,8 +13,6 @@ function initMap() {
 }
 
 (function() {
-    var files = [];
-    
     window.onload = function() {
         var view = document.querySelector('#view');
         var add = document.querySelector('#add');
@@ -24,6 +22,7 @@ function initMap() {
         var send = document.querySelector('#send');
 
         add.addEventListener('click', function(e) {input.click();}, false);
+        del.addEventListener('click', removeSelectedImages, false);
         input.addEventListener('change', handleFiles, false);
         send.addEventListener('click', sendFiles, false);
         view.addEventListener('click', function(e) {
@@ -41,9 +40,10 @@ function initMap() {
             var form = document.querySelector('form');
             var formData = new FormData(form);
 
-            files.forEach(function(file) {
-                console.log(file);
-                formData.append(file.name, file);
+            var imgs = document.querySelectorAll('.images>img');
+            Array.prototype.forEach.call(imgs, function(img) {
+                console.log(img.File);
+                formData.append(img.File.name, img.File);
             });
             
             var xhr = new XMLHttpRequest();
@@ -77,16 +77,30 @@ function initMap() {
             reader.onload = function(e) {
                 var img = document.createElement('img');
                 img.src = e.target.result;
-                images.appendChild(img);
+                img.File = file;
                 img.addEventListener('click', function(e) {
                     e.target.classList.toggle('selected');
                 });
-                files.push(file);
+                images.appendChild(img);
+                images.classList.remove('disabled');
+                document.querySelector('#banner').classList.add('hide');
             };
             reader.onerror = function() {
                 alert("Image did not load.");
             };
             reader.readAsDataURL(file);
+        }
+
+        function removeSelectedImages(e) {
+            var images = document.querySelector('.images');
+            var imgs = document.querySelectorAll('img.selected');
+            Array.prototype.forEach.call(imgs, function(img) {
+                images.removeChild(img);
+            });
+            if (images.querySelectorAll('img').length == 0) {
+                images.classList.add('disabled');
+                document.querySelector('#banner').classList.remove('hide');
+            }
         }
     };
 }());

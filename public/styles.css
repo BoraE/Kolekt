@@ -28,11 +28,6 @@ body {
  }
 
 /* Top section */
-img {
-    height: 95%;
-    padding-right: 2px;
-}
-
 .images {
     height: calc(100% - 2.2em - 3px);
     border-bottom: 1px solid #aaa;
@@ -48,7 +43,27 @@ img {
     height: 2.2em;
 }
 
+img {
+    height: 95%;
+    padding-right: 2px;
+}
+
+#banner {
+    position: absolute;
+    margin: auto;
+    width: auto;
+}
+
+/* Middle section */
+.container {
+    padding: 5px;
+}
+
 /* */
+.disabled {
+    background-color: #ccc;
+}
+
 .hide {
     display: none;
 }
