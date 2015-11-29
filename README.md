@@ -3,14 +3,19 @@
 ## Installation
 
 ## Usage
-Install the required npm modules:
+Clone the Kolekt repository:
 ```
-npm install
+$ git clone https://github.com/BoraE/Kolekt
+```
+
+Install dependencies:
+```
+$ npm install
 ```
 
 Start the server:
 ```
-npm start
+$ npm start
 ```
 
 Point your browser to
@@ -18,4 +23,4 @@ Point your browser to
 http://localhost:8080/index.html
 ```
 
-Uploaded images and data will be to the directory ```../Kolekt-data``` relative to the installation directory.
+Uploaded images and data will be stored in the directory ```../Kolekt-data``` relative to the installation directory. You must manually create the ```Kolekt-data``` directory before running the application.
