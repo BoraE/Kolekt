@@ -1,0 +1,62 @@
+@import './resets.css';
+
+/* Page styles */
+body {
+    background-color: #eeeeee;
+    border: 1px solid #aaa;
+}
+
+#top, #middle, #bottom {
+    background-color: white;
+    border: 1px solid #aaa;
+    margin: 5px;
+}
+
+#top {
+    height: calc(35% - 10px);
+    position: relative;
+ }
+
+#middle {
+    height: calc(65% - 5px - 2.2em - 8px);
+    overflow: auto;
+}
+
+#bottom {
+    height: calc(2.2em + 3px);
+    position: relative;
+ }
+
+/* Top section */
+img {
+    height: 95%;
+    padding-right: 2px;
+}
+
+.images {
+    height: calc(100% - 2.2em - 3px);
+    border-bottom: 1px solid #aaa;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 3px;
+    height: 2.2em;
+}
+
+/* */
+.hide {
+    display: none;
+}
+
+.selected {
+    opacity: 0.5;
+}
+
+input[type=file] {
+    display: none;
+}

@@ -1,0 +1,20 @@
+{
+    "name": "Kolekt",
+    "version": "0.0.1",
+    "description": "Mobile data collection tool",
+    "author": {
+        "name": "Bora Eryilmaz"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/BoraE/Kolekt.git"
+    },
+    "devDependencies": {},
+    "dependencies": {
+        "express": "^4.13.3",
+        "multiparty": "^4.1.2"
+    },
+    "scripts": {
+        "start": "node app.js"
+    }
+}
