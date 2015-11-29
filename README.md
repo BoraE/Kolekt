@@ -1,17 +1,21 @@
 # Kolekt
 
 ## Installation
-```
-npm install Kolekt
-```
 
 ## Usage
-Start the server by issuing the command
+Install the required npm modules:
+```
+npm install
+```
+
+Start the server:
 ```
 npm start
 ```
-and point your browser to
 
+Point your browser to
 ```html
 http://localhost:8080/index.html
 ```
+
+Uploaded images and data will be to the directory ```../Kolekt-data``` relative to the installation directory.
