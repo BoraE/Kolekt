@@ -28,7 +28,7 @@ body {
  }
 
 /* Top section */
-.images {
+#images {
     height: calc(100% - 2.2em - 3px);
     border-bottom: 1px solid #aaa;
     overflow: auto;

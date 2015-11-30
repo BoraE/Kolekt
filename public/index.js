@@ -22,34 +22,26 @@ function initMap() {
         var send = document.querySelector('#send');
 
         add.addEventListener('click', function(e) {input.click();}, false);
-        del.addEventListener('click', removeSelectedImages, false);
+        del.addEventListener('click', function(e) {removeSelectedImages();} , false);       
         input.addEventListener('change', handleFiles, false);
+
         send.addEventListener('click', sendFiles, false);
         view.addEventListener('click', function(e) {
             var map = document.getElementById('map');
-            var images = document.querySelector('.images');
+            var images = document.querySelector('#images');
             map.classList.toggle('hide');
             images.classList.toggle('hide');
             e.target.textContent = (e.target.textContent==='Map')?'Photos':'Map';
             if (e.target.textContent === 'Photos') {
-                initMap();
+                // initMap();
             }
         });
         
         function sendFiles(e) {
-            var form = document.querySelector('form');
-            var formData = new FormData(form);
-
-            var imgs = document.querySelectorAll('.images>img');
-            Array.prototype.forEach.call(imgs, function(img) {
-                console.log(img.File);
-                formData.append(img.File.name, img.File);
-            });
-            
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = handleRequest;
             xhr.open('POST', '/data', true);
-            xhr.send(formData);
+            xhr.send(getFormData());
             
             function handleRequest() {
                 try {
@@ -66,8 +58,6 @@ function initMap() {
         
         function handleFiles(e) {
             var file = e.target.files[0];
-            var images = document.querySelector('.images');
-            
             if (file.type.search('image/*') == -1) {
                 alert("Selected file is not an image.");
                 return;
@@ -75,15 +65,7 @@ function initMap() {
             
             var reader = new FileReader();
             reader.onload = function(e) {
-                var img = document.createElement('img');
-                img.src = e.target.result;
-                img.File = file;
-                img.addEventListener('click', function(e) {
-                    e.target.classList.toggle('selected');
-                });
-                images.appendChild(img);
-                images.classList.remove('disabled');
-                document.querySelector('#banner').classList.add('hide');
+                addImageFromFile(e.target.result, file);
             };
             reader.onerror = function() {
                 alert("Image did not load.");
@@ -91,16 +73,49 @@ function initMap() {
             reader.readAsDataURL(file);
         }
 
-        function removeSelectedImages(e) {
-            var images = document.querySelector('.images');
-            var imgs = document.querySelectorAll('img.selected');
-            Array.prototype.forEach.call(imgs, function(img) {
-                images.removeChild(img);
+        // Construct form data to be sent over to the server
+        function getFormData() {
+            var form = document.querySelector('form');
+            var formData = new FormData(form);
+            var images = document.querySelectorAll('#images>img');
+            Array.prototype.forEach.call(images, function(el) {
+                var file = el.File;
+                console.log(file);
+                formData.append(file.name, file);
             });
-            if (images.querySelectorAll('img').length == 0) {
-                images.classList.add('disabled');
-                document.querySelector('#banner').classList.remove('hide');
+            return formData;
+        }
+        
+        // Add add to the top banner
+        function addImageFromFile(url, file) {
+            var container = document.getElementById('images');
+            var el = document.createElement('img');
+            el.src = url;
+            el.File = file;
+            el.addEventListener('click', function(e) {
+                var selected;
+                e.target.classList.toggle('selected');
+                selected = container.querySelectorAll('img.selected');
+                document.getElementById('del').disabled = (selected.length === 0);
+            });
+            container.appendChild(el);
+            container.classList.remove('disabled');
+            document.getElementById('banner').classList.add('hide');
+        }
+        
+        // Remove selected images from the top banner
+        function removeSelectedImages() {
+            var container = document.getElementById('images');
+            var images = container.querySelectorAll('img.selected');
+            Array.prototype.forEach.call(images, function(el) {
+                container.removeChild(el);
+            });
+            // If all images are removed bring back the information banner
+            if (container.querySelectorAll('img').length === 0) {
+                container.classList.add('disabled');
+                document.getElementById('banner').classList.remove('hide');
             }
+            document.getElementById('del').disabled = true;
         }
     };
 }());
