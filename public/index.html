@@ -12,34 +12,35 @@
   </head>
   
   <body>
-    <section id="top">
-      <div id="map" class="hide">
-      </div>
-      <div id="images" class="disabled">
-        <div id="banner">Press '+' to add a picture.</div>
-      </div>
-      <div class="buttons">
-        <button id="view">Map</button>
-        <button id="add">+</button>
-        <button id="del" disabled="">-</button>
-      </div>
-    </section>
-
-    <section id="middle">
-      <div class="container">
-        <form>
+    <main>
+      <h1>Images</h1>
+      <section class="image-selection">
+        <div id="map" class="hide"></div>
+        <div id="images" class="disabled">
+          <div id="banner">Press '+' to add a picture.</div>
+        </div>
+        <div class="buttons">
+          <button id="view">Map</button>
+          <button id="add">+</button>
+          <button id="del" disabled="">-</button>
+        </div>
+      </section>
+      
+      <h1>Data</h1>
+      <section class="data-entry">
+        <form class="form">
           <label for="first_name">First name:</label><br>
           <input type="text" id="first_name" name="first_name">
           <br>
           <label for="last_name">Last name:</label><br>
           <input type="text" id="last_name" name="last_name">
           <br><br>
-
+          
           <label>Gender:</label><br>
           <input type="radio" name="gender" value="male" checked>Male<br>
           <input type="radio" name="gender" value="female">Female
           <br><br>
-
+          
           <label>Subjects:</label><br>
           <input type="checkbox" name="subjects" value="maths">Maths<br>
           <input type="checkbox" name="subjects" value="physics">Physics<br>
@@ -58,25 +59,20 @@
             <option value="Providence">Providence</option>
           </select>
           <br><br>
-
+          
           <label for="quantity">Quantity (between 1 and 5):</label><br>
           <br>
           <input type="number" id="quantity" name="quantity" length="5" value="2" min="1" max="5">
           <br><br>
         </form>
-      </div>
-    </section>
-
-    <section id="bottom">
-      <div class="buttons">
+      </section>
+      
+      <section class="data-submit">
         <input type="file" accept="image/*">
-        <button id="send">Submit</button>
-      </div>
-    </section>
-
+        <div id="send"></div>
+      </section>
+    </main>
+    
     <script src="index.js"></script>
-    <!--
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdwzCUUi-pj8QDKNgd234Fo598yw4kCBg&callback=initMap"></script>
-    -->
   </body>
 </html>

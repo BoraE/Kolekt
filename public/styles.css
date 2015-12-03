@@ -1,39 +1,50 @@
 @import './resets.css';
 
-/* Page styles */
 body {
-    background-color: #eeeeee;
-    border: 1px solid #aaa;
+    background-color: #DDD;
     font-family: sans-serif;
 }
 
-#top, #middle, #bottom {
-    background-color: white;
-    border: 1px solid #aaa;
-    margin: 5px;
+main {
+    height: 100%;
+    padding: 0.5em 1em 0 1em;
 }
 
-#top {
-    height: calc(35% - 10px);
-    position: relative;
- }
-
-#middle {
-    height: calc(65% - 5px - 2.2em - 8px);
-    overflow: auto;
+h1 {
+    color: #888;
+    font-size: 1em;
+    font-weight: bold;
+    margin-left: 0.5em;
+    text-transform: uppercase;
 }
 
-#bottom {
-    height: calc(2.2em + 3px);
+.image-selection {
+    background-color: #FFF;
+    border-radius: 0.5em;
+    border: 1px solid #AAA;
+    box-shadow: 2px 2px 4px #AAA;
+    height: 25%;
+    margin-bottom: 0.5em;
     position: relative;
- }
+}
 
-/* Top section */
 #images {
     height: calc(100% - 2.2em);
     border-bottom: 1px solid #aaa;
     overflow: auto;
     white-space: nowrap;
+    border-radius: 0.5em 0.5em 0 0;
+}
+
+img {
+    height: 95%;
+    padding-right: 2px;
+}
+
+#banner {
+    position: absolute;
+    margin: 2em;
+    width: auto;
 }
 
 .buttons {
@@ -44,27 +55,45 @@ body {
     height: 2.2em;
 }
 
-img {
-    height: 95%;
-    padding-right: 2px;
+.data-entry {
+    background-color: #FFF;
+    border-radius: 0.5em;
+    border: 1px solid #AAA;
+    box-shadow: 2px 2px 4px #AAA;
+    height: calc(75% - 6.5em - 6px);
+    padding: 0.5em;
 }
 
-#banner {
-    position: absolute;
-    margin: auto;
-    width: auto;
+.data-submit {
+    height: 4em;
+    padding: 0.5em;
 }
 
-/* Middle section */
-.container {
-    padding: 5px;
+#send {
+    border: none;
+    background-color: #DDD;
+    background-image: url("checkmark.png");
+    background-size: contain;
+    border-radius: 1.5em;
+    margin-left: calc(50% - 1.5em);
+    height: 3em;
+    width: 3em;
 }
 
-/* */
+#send:active {
+    border: 1px solid orange;
+    background-color: gray;
+}
+
+.form {
+    overflow: auto;
+    height: 100%;
+}
+
 .disabled {
     background-color: #ccc;
 }
-
+ 
 .hide {
     display: none;
 }
