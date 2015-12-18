@@ -10,22 +10,25 @@
     <title>Kolekt</title>
     <link rel="stylesheet" href="styles.css">
   </head>
-  
+
   <body>
     <main>
-      <h1>Images</h1>
-      <section class="image-selection">
-        <div id="map" class="hide"></div>
-        <div id="images" class="disabled">
-          <div id="banner">Press '+' to add a picture.</div>
-        </div>
+      <section class="data-submit">
+        <input type="file" accept="image/*">
         <div class="buttons">
           <button id="view">Map</button>
           <button id="add">+</button>
           <button id="del" disabled="">-</button>
         </div>
+        <div id="send"></div>
       </section>
-      
+
+      <h1>Images</h1>
+      <section class="image-selection">
+        <div id="map" class="hide"></div>
+        <div id="images" class="disabled"></div>
+      </section>
+
       <h1>Data</h1>
       <section class="data-entry">
         <form class="form">
@@ -35,12 +38,12 @@
           <label for="last_name">Last name:</label><br>
           <input type="text" id="last_name" name="last_name">
           <br><br>
-          
+
           <label>Gender:</label><br>
           <input type="radio" name="gender" value="male" checked>Male<br>
           <input type="radio" name="gender" value="female">Female
           <br><br>
-          
+
           <label>Subjects:</label><br>
           <input type="checkbox" name="subjects" value="maths">Maths<br>
           <input type="checkbox" name="subjects" value="physics">Physics<br>
@@ -51,7 +54,7 @@
           <input type="checkbox" name="subjects" value="writing">Writing<br>
           <input type="checkbox" name="subjects" value="cinema">Cinema<br>
           <br><br>
-          
+
           <label>Location:</label>
           <br>
           <select name="location">
@@ -59,20 +62,15 @@
             <option value="Providence">Providence</option>
           </select>
           <br><br>
-          
+
           <label for="quantity">Quantity (between 1 and 5):</label><br>
           <br>
           <input type="number" id="quantity" name="quantity" length="5" value="2" min="1" max="5">
           <br><br>
         </form>
       </section>
-      
-      <section class="data-submit">
-        <input type="file" accept="image/*">
-        <div id="send"></div>
-      </section>
     </main>
-    
+
     <script src="index.js"></script>
   </body>
 </html>

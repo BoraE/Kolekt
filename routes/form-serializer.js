@@ -1,55 +1,63 @@
-module.exports = FormSerializer;
+'use strict'
 
-var events = require('events');
-var fs = require('fs');
-var multiparty = require('multiparty');
+const events = require('events');
+const fs = require('fs');
+const multiparty = require('multiparty');
 
-function FormSerializer(opts) {
-    // Can call as FormSerializer() or new FormSerializer()
-    if (!(this instanceof FormSerializer)) {
-        return new FormSerializer(opts);
+class FormSerializer {
+    constructor(opts) {
+        opts = opts || {};
+        this.uploadDir = opts.uploadDir || '../Kolekt-data';
+        this.dataFile = opts.dataFile || 'kollect-data.json';
+        this.emitter = new events.EventEmitter();
     }
-    opts = opts || {};
-    this.uploadDir = opts.uploadDir || '../Kolekt-data';
-    this.emitter = new events.EventEmitter();
+
+    on(event, listener) {
+        this.emitter.on(event, listener);
+    }
+
+    emit(event, data) {
+        this.emitter.emit(event, data);
+    }
+
+    serialize(request) {
+        var form = new multiparty.Form({uploadDir:this.uploadDir});
+        var data = {};
+        var self = this;
+
+        form.on('field', function(name, value) {
+            if (data[name] === undefined) {
+                data[name] = [];
+            }
+            data[name].push(value);
+        });
+
+        form.on('file', function(name, file) {
+            if (data['files'] === undefined) {
+                data['files'] = [];
+            }
+            data['files'].push(file.path)
+        });
+
+        form.on('error', function(err) {
+            self.emit('error', err.statusCode);
+        });
+
+        form.on('close', function() {
+            var suffix = ',\n';
+            var filePath = self.uploadDir+'/'+self.dataFile;
+            fs.appendFile(filePath, JSON.stringify(data)+suffix, function(err) {
+                if (err) {
+                    Console.log('Could not store for data', data);
+                    throw err;
+                }
+                console.log('Stored form data', data);
+                self.emit('complete', 200);
+            });
+        });
+
+        form.parse(request);
+    }
 }
 
-FormSerializer.prototype.serialize = function(request) {
-    var form = new multiparty.Form({uploadDir:this.uploadDir});
-    var data = {};
-    var self = this;
-       
-    form.on('field', function(name, value) {
-        if (data[name] === undefined) {
-            data[name] = [];
-        }
-        data[name].push(value);
-    });
-    
-    form.on('file', function(name, file) {
-        if (data['files'] === undefined) {
-            data['files'] = [];
-        }
-        data['files'].push(file.path)
-    });
-    
-    form.on('error', function(err) {
-        self.emit('error', err.statusCode);
-    });
-
-    form.on('close', function() {
-        // console.log('Stored form data', JSON.stringify(data));
-        console.log('Stored form data', data);
-        self.emit('complete', 200);
-    });
-
-    form.parse(request);
-};
-
-FormSerializer.prototype.on = function(event, listener) {
-    this.emitter.on(event, listener);
-};
-
-FormSerializer.prototype.emit = function(event, data) {
-    this.emitter.emit(event, data);
-};
+module.exports = FormSerializer;

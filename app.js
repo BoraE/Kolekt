@@ -1,3 +1,4 @@
 (function() {
-    var server = require('./routes/server')();
+    var server = require('./routes/server');
+    new server();
 }());

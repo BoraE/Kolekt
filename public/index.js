@@ -4,7 +4,7 @@ function initMap() {
         zoom: 13,
         center: {lat:42.352741, lng:-71.121343}
     });
-    
+
     var marker = new google.maps.Marker({
         position: {lat:42.352741, lng:-71.121343},
         title:"Current position"
@@ -22,7 +22,7 @@ function initMap() {
         var send = document.querySelector('#send');
 
         add.addEventListener('click', function(e) {input.click();}, false);
-        del.addEventListener('click', function(e) {removeSelectedImages();} , false);       
+        del.addEventListener('click', function(e) {removeSelectedImages();} , false);
         input.addEventListener('change', handleFiles, false);
 
         send.addEventListener('click', sendFiles, false);
@@ -36,13 +36,13 @@ function initMap() {
                 // initMap();
             }
         });
-        
+
         function sendFiles(e) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = handleRequest;
             xhr.open('POST', '/data', true);
             xhr.send(getFormData());
-            
+
             function handleRequest() {
                 try {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -55,14 +55,14 @@ function initMap() {
                 }
             }
         }
-        
+
         function handleFiles(e) {
             var file = e.target.files[0];
             if (file.type.search('image/*') == -1) {
                 alert("Selected file is not an image.");
                 return;
             }
-            
+
             var reader = new FileReader();
             reader.onload = function(e) {
                 addImageFromFile(e.target.result, file);
@@ -85,7 +85,7 @@ function initMap() {
             });
             return formData;
         }
-        
+
         // Add add to the top banner
         function addImageFromFile(url, file) {
             var container = document.getElementById('images');
@@ -100,9 +100,8 @@ function initMap() {
             });
             container.appendChild(el);
             container.classList.remove('disabled');
-            document.getElementById('banner').classList.add('hide');
         }
-        
+
         // Remove selected images from the top banner
         function removeSelectedImages() {
             var container = document.getElementById('images');
@@ -113,7 +112,6 @@ function initMap() {
             // If all images are removed bring back the information banner
             if (container.querySelectorAll('img').length === 0) {
                 container.classList.add('disabled');
-                document.getElementById('banner').classList.remove('hide');
             }
             document.getElementById('del').disabled = true;
         }

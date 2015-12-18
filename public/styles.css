@@ -1,13 +1,14 @@
 @import './resets.css';
 
 body {
-    background-color: #DDD;
+    background-color: #FFF;
     font-family: sans-serif;
 }
 
 main {
+    overflow: auto;
+    white-space: nowrap;
     height: 100%;
-    padding: 0.5em 1em 0 1em;
 }
 
 h1 {
@@ -20,31 +21,40 @@ h1 {
 
 .image-selection {
     background-color: #FFF;
-    border-radius: 0.5em;
     border: 1px solid #AAA;
-    box-shadow: 2px 2px 4px #AAA;
     height: 25%;
     margin-bottom: 0.5em;
-    position: relative;
+    overflow: auto;
+    white-space: nowrap;
 }
 
 #images {
-    height: calc(100% - 2.2em);
-    border-bottom: 1px solid #aaa;
-    overflow: auto;
-    white-space: nowrap;
-    border-radius: 0.5em 0.5em 0 0;
+    height: 98%;
 }
 
 img {
-    height: 95%;
+    height: 100%;
     padding-right: 2px;
 }
 
-#banner {
-    position: absolute;
-    margin: 2em;
-    width: auto;
+img:last-child {
+    padding-right: 0;
+}
+
+.data-entry {
+    background-color: #FFF;
+    border: 1px solid #AAA;
+    height: auto;
+    padding: 0.5em;
+}
+
+.data-submit {
+    background-color: #FFF;
+    border: 1px solid #AAA;
+    height: 4em;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    position: relative;
 }
 
 .buttons {
@@ -52,21 +62,7 @@ img {
     bottom: 0;
     left: 0;
     padding: 3px;
-    height: 2.2em;
-}
-
-.data-entry {
-    background-color: #FFF;
-    border-radius: 0.5em;
-    border: 1px solid #AAA;
-    box-shadow: 2px 2px 4px #AAA;
-    height: calc(75% - 6.5em - 6px);
-    padding: 0.5em;
-}
-
-.data-submit {
-    height: 4em;
-    padding: 0.5em;
+    height: 3em;
 }
 
 #send {
@@ -75,9 +71,10 @@ img {
     background-image: url("checkmark.png");
     background-size: contain;
     border-radius: 1.5em;
-    margin-left: calc(50% - 1.5em);
+    right: 1em;
     height: 3em;
     width: 3em;
+    position: absolute;
 }
 
 #send:active {
@@ -85,15 +82,10 @@ img {
     background-color: gray;
 }
 
-.form {
-    overflow: auto;
-    height: 100%;
-}
-
 .disabled {
     background-color: #ccc;
 }
- 
+
 .hide {
     display: none;
 }
