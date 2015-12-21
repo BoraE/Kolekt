@@ -8,25 +8,28 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <title>Kolekt</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="styles.css">
   </head>
 
   <body>
     <main>
+      <section id="navigation"></section>
+
+      <h1>Images and Map</h1>
+      <section class="image-selection">
+        <div id="location" class="hide"></div>
+        <div id="images" class="disabled"></div>
+      </section>
+
       <section class="data-submit">
         <input type="file" accept="image/*">
         <div class="buttons">
-          <button id="view">Map</button>
-          <button id="add">+</button>
-          <button id="del" disabled="">-</button>
+          <button id="camera" class="hide"><i class="material-icons blue">camera_alt</i></button>
+          <button id="map"><i class="material-icons blue">add_location</i></button>
+          <button id="add"><i class="material-icons green">add</i></button>
+          <button id="del" disabled=""><i class="material-icons red">remove</i></button>
         </div>
-        <div id="send"></div>
-      </section>
-
-      <h1>Images</h1>
-      <section class="image-selection">
-        <div id="map" class="hide"></div>
-        <div id="images" class="disabled"></div>
       </section>
 
       <h1>Data</h1>
@@ -71,6 +74,23 @@
       </section>
     </main>
 
+    <template id="navigator">
+      <div>
+        <div style="float:left">
+          <button><i class="material-icons green">add</i></button>
+          <button><i class="material-icons red">remove</i></button>
+          <button><i class="material-icons blue">keyboard_arrow_left</i></button>
+          <button><i class="material-icons blue">keyboard_arrow_right</i></button>
+        </div>
+        <div style="float:right">
+          <button><i class="material-icons red">clear</i></button>
+          <button id="send"><i class="material-icons green">done</i></button>
+          <button><i class="material-icons green">done_all</i></button>
+        </div>
+      </div>
+    </template>
+
     <script src="index.js"></script>
+    <script src="js/form-navigator.js"></script>
   </body>
 </html>

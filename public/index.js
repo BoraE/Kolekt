@@ -1,3 +1,5 @@
+// import FormNavigator from 'js/form-navigator.js';
+
 var map;
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
@@ -7,14 +9,18 @@ function initMap() {
 
     var marker = new google.maps.Marker({
         position: {lat:42.352741, lng:-71.121343},
-        title:"Current position"
+        title: 'Current position'
     });
     marker.setMap(map);
 }
 
 (function() {
     window.onload = function() {
-        var view = document.querySelector('#view');
+        var fn = new FormNavigator();
+        fn.placeAt('#navigation');
+
+        var camera = document.querySelector('#camera');
+        var map = document.querySelector('#map');
         var add = document.querySelector('#add');
         var del = document.querySelector('#del');
 
@@ -26,15 +32,21 @@ function initMap() {
         input.addEventListener('change', handleFiles, false);
 
         send.addEventListener('click', sendFiles, false);
-        view.addEventListener('click', function(e) {
-            var map = document.getElementById('map');
+        map.addEventListener('click', function(e) {
+            var location = document.getElementById('location');
             var images = document.querySelector('#images');
-            map.classList.toggle('hide');
-            images.classList.toggle('hide');
-            e.target.textContent = (e.target.textContent==='Map')?'Photos':'Map';
-            if (e.target.textContent === 'Photos') {
-                // initMap();
-            }
+            location.classList.remove('hide');
+            camera.classList.remove('hide');
+            map.classList.add('hide');
+            images.classList.add('hide');
+        });
+        camera.addEventListener('click', function(e) {
+            var location = document.getElementById('location');
+            var images = document.querySelector('#images');
+            location.classList.add('hide');
+            camera.classList.add('hide');
+            map.classList.remove('hide');
+            images.classList.remove('hide');
         });
 
         function sendFiles(e) {
@@ -62,10 +74,13 @@ function initMap() {
                 alert("Selected file is not an image.");
                 return;
             }
+            var images = document.querySelector('#images');
+            images.classList.add('busy');
 
             var reader = new FileReader();
             reader.onload = function(e) {
                 addImageFromFile(e.target.result, file);
+                images.classList.remove('busy');
             };
             reader.onerror = function() {
                 alert("Image did not load.");
