@@ -1,13 +1,13 @@
-'use strict'
+'use strict';
 
 const express = require('express');
-const fs = require('./form-serializer');
+const FS = require('./form-serializer');
 const http = require('http');
 
 class Server {
     constructor(opts) {
         opts = opts || {};
-        this.port = opts.port || 8080;
+        this.port = opts.port || 8124;
         this.startServer();
     }
 
@@ -22,7 +22,7 @@ class Server {
 
         // Handle POST requests
         app.post("/data", function(req, res) {
-            var form = new fs();
+            var form = new FS();
             form.on('complete', function(status) {
                 res.status(status).send('OK');
             });

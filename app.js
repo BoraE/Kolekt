@@ -1,4 +1,6 @@
+"use strict";
+
 (function() {
-    var server = require('./routes/server');
-    new server();
+    var Server = require('./routes/server');
+    new Server();
 }());

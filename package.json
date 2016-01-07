@@ -9,12 +9,25 @@
         "type": "git",
         "url": "https://github.com/BoraE/Kolekt.git"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "jshint": "^2.8.0",
+        "stylus": "^0.53.0"
+    },
     "dependencies": {
         "express": "^4.13.3",
         "multiparty": "^4.1.2"
     },
     "scripts": {
-        "start": "node app.js"
+        "start": "node app.js",
+        "watch": "nodemon -w . -e html,js,styl -x 'npm run build'",
+
+        "build": "npm run build:css && npm run build:js && npm run build:html",
+        "build:css": "npm run stylus",
+        "build:html": "npm run html",
+        "build:js": "npm run jshint",
+
+        "stylus": "stylus public/styl/*.styl -o public/css",
+        "jshint": "jshint **/*.js --exclude-path .gitignore",
+        "html": ""
     }
 }

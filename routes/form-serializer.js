@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const events = require('events');
 const fs = require('fs');
@@ -33,10 +33,10 @@ class FormSerializer {
         });
 
         form.on('file', function(name, file) {
-            if (data['files'] === undefined) {
-                data['files'] = [];
+            if (data.files === undefined) {
+                data.files = [];
             }
-            data['files'].push(file.path)
+            data.files.push(file.path);
         });
 
         form.on('error', function(err) {
@@ -48,7 +48,7 @@ class FormSerializer {
             var filePath = self.uploadDir+'/'+self.dataFile;
             fs.appendFile(filePath, JSON.stringify(data)+suffix, function(err) {
                 if (err) {
-                    Console.log('Could not store for data', data);
+                    console.log('Could not store for data', data);
                     throw err;
                 }
                 console.log('Stored form data', data);

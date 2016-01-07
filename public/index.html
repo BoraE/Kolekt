@@ -9,7 +9,7 @@
 
     <title>Kolekt</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
   </head>
 
   <body>
@@ -25,10 +25,10 @@
       <section class="data-submit">
         <input type="file" accept="image/*">
         <div class="buttons">
-          <button id="camera" class="hide"><i class="material-icons blue">camera_alt</i></button>
-          <button id="map"><i class="material-icons blue">add_location</i></button>
-          <button id="add"><i class="material-icons green">add</i></button>
-          <button id="del" disabled=""><i class="material-icons red">remove</i></button>
+          <button id="camera" class="hide"><i class="material-icons">camera_alt</i></button>
+          <button id="map"><i class="material-icons">add_location</i></button>
+          <button id="add"><i class="material-icons">add</i></button>
+          <button id="del" disabled=""><i class="material-icons">remove</i></button>
         </div>
       </section>
 
@@ -77,20 +77,19 @@
     <template id="navigator">
       <div>
         <div style="float:left">
-          <button><i class="material-icons green">add</i></button>
-          <button><i class="material-icons red">remove</i></button>
-          <button><i class="material-icons blue">keyboard_arrow_left</i></button>
-          <button><i class="material-icons blue">keyboard_arrow_right</i></button>
+          <button><i class="material-icons">add</i></button>
+          <button><i class="material-icons">remove</i></button>
+          <button><i class="material-icons">keyboard_arrow_left</i></button>
+          <button><i class="material-icons">keyboard_arrow_right</i></button>
         </div>
         <div style="float:right">
-          <button><i class="material-icons red">clear</i></button>
-          <button id="send"><i class="material-icons green">done</i></button>
-          <button><i class="material-icons green">done_all</i></button>
+          <button><i class="material-icons">clear</i></button>
+          <button id="send"><i class="material-icons">done</i></button>
+          <button><i class="material-icons">done_all</i></button>
         </div>
       </div>
     </template>
 
-    <script src="index.js"></script>
-    <script src="js/form-navigator.js"></script>
+    <script data-main="js/main" src="lib/require.js"></script>
   </body>
 </html>
