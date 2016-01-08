@@ -13,16 +13,26 @@
   </head>
 
   <body>
+    <header>
+      <div style="float:left">
+        <div class="button" id="prev"></div>
+        <div class="button" id="next"></div>
+      </div>
+      <div style="float:right">
+        <div class="button" id="remove"></div>
+        <div class="button" id="send"></div>
+        <div class="button disabled" id="login"></div>
+      </div>
+    </header>
+
     <main>
-      <section id="navigation"></section>
+      <section id="section_photos">
+        <div class="section_title">Photos</div>
+        <div class="section_content" class="disabled">
+          <div class="button" id="add_photo"></div>
+          <div id="location" class="hide"></div>
+        </div>
 
-      <h1>Images and Map</h1>
-      <section class="image-selection">
-        <div id="location" class="hide"></div>
-        <div id="images" class="disabled"></div>
-      </section>
-
-      <section class="data-submit">
         <input type="file" accept="image/*">
         <div class="buttons">
           <button id="camera" class="hide"><i class="material-icons">camera_alt</i></button>
@@ -32,63 +42,60 @@
         </div>
       </section>
 
-      <h1>Data</h1>
-      <section class="data-entry">
-        <form class="form">
-          <label for="first_name">First name:</label><br>
-          <input type="text" id="first_name" name="first_name">
-          <br>
-          <label for="last_name">Last name:</label><br>
-          <input type="text" id="last_name" name="last_name">
-          <br><br>
+      <section id="map">
+        <div class="section_title">Map</div>
+        <div class="section_content"></div>
+      </section>
 
-          <label>Gender:</label><br>
-          <input type="radio" name="gender" value="male" checked>Male<br>
-          <input type="radio" name="gender" value="female">Female
-          <br><br>
+      <section id="section_form">
+        <div class="section_title">Data</div>
+        <div class="section_content">
+          <form class="form">
+            <label for="first_name">First name:</label><br>
+            <input type="text" id="first_name" name="first_name">
+            <br>
+            <label for="last_name">Last name:</label><br>
+            <input type="text" id="last_name" name="last_name">
+            <br><br>
 
-          <label>Subjects:</label><br>
-          <input type="checkbox" name="subjects" value="maths">Maths<br>
-          <input type="checkbox" name="subjects" value="physics">Physics<br>
-          <input type="checkbox" name="subjects" value="chemistry">Chemistry<br>
-          <input type="checkbox" name="subjects" value="english">English<br>
-          <input type="checkbox" name="subjects" value="philosophy">Philosophy<br>
-          <input type="checkbox" name="subjects" value="arts">Arts<br>
-          <input type="checkbox" name="subjects" value="writing">Writing<br>
-          <input type="checkbox" name="subjects" value="cinema">Cinema<br>
-          <br><br>
+            <label>Gender:</label><br>
+            <input type="radio" name="gender" value="male" checked>Male<br>
+            <input type="radio" name="gender" value="female">Female
+            <br><br>
 
-          <label>Location:</label>
-          <br>
-          <select name="location">
-            <option value="Boston" selected>Boston</option>
-            <option value="Providence">Providence</option>
-          </select>
-          <br><br>
+            <label>Subjects:</label><br>
+            <input type="checkbox" name="subjects" value="maths">Maths<br>
+            <input type="checkbox" name="subjects" value="physics">Physics<br>
+            <input type="checkbox" name="subjects" value="chemistry">Chemistry<br>
+            <input type="checkbox" name="subjects" value="english">English<br>
+            <input type="checkbox" name="subjects" value="philosophy">Philosophy<br>
+            <input type="checkbox" name="subjects" value="arts">Arts<br>
+            <input type="checkbox" name="subjects" value="writing">Writing<br>
+            <input type="checkbox" name="subjects" value="cinema">Cinema<br>
+            <br><br>
 
-          <label for="quantity">Quantity (between 1 and 5):</label><br>
-          <br>
-          <input type="number" id="quantity" name="quantity" length="5" value="2" min="1" max="5">
-          <br><br>
-        </form>
+            <label>Location:</label>
+            <br>
+            <select name="location">
+              <option value="Boston" selected>Boston</option>
+              <option value="Providence">Providence</option>
+            </select>
+            <br><br>
+
+            <label for="quantity">Quantity (between 1 and 5):</label><br>
+            <br>
+            <input type="number" id="quantity" name="quantity" length="5" value="2" min="1" max="5">
+            <br><br>
+          </form>
+        </div>
       </section>
     </main>
 
-    <template id="navigator">
-      <div>
-        <div style="float:left">
-          <button><i class="material-icons">add</i></button>
-          <button><i class="material-icons">remove</i></button>
-          <button><i class="material-icons">keyboard_arrow_left</i></button>
-          <button><i class="material-icons">keyboard_arrow_right</i></button>
-        </div>
-        <div style="float:right">
-          <button><i class="material-icons">clear</i></button>
-          <button id="send"><i class="material-icons">done</i></button>
-          <button><i class="material-icons">done_all</i></button>
-        </div>
+    <footer>
+      <div style="float:right">
+        <div class="button" id="delete"></div>
       </div>
-    </template>
+    </footer>
 
     <script data-main="js/main" src="lib/require.js"></script>
   </body>

@@ -7,9 +7,6 @@ define([], function() {
 
     FormNavigator.prototype.placeAt = function(parent) {
         this.parent = document.querySelector(parent);
-        var t = document.querySelector('#navigator');
-        var clone = document.importNode(t.content, true);
-        this.parent.appendChild(clone);
     };
 
     FormNavigator.prototype.setState = function(state) {

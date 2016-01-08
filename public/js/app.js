@@ -1,32 +1,32 @@
 define(['form-navigator'], function(FormNavigator) {
     function initialize() {
         console.log('Loading app.js...');
-        // setup();
+        setup();
         setup2();
     }
 
     function setup() {
-        var photo_title = document.querySelector('#photos > .section_title');
-        var map_title = document.querySelector('#map > .section_title');
-        var form_title = document.querySelector('#form > .section_title');
+        var photo_title = document.querySelector('#section_photos > .section_title');
+        //var map_title = document.querySelector('#map > .section_title');
+        var form_title = document.querySelector('#section_form > .section_title');
 
         photo_title.addEventListener("click", handlePhotoSection);
 
-        map_title.addEventListener("click", function(e) {
-            var map_content = document.querySelector('#map > .section_content');
-            map_content.classList.toggle('hide');
+        // map_title.addEventListener("click", function(e) {
+        //     var map_content = document.querySelector('#map > .section_content');
+        //     map_content.classList.toggle('hide');
 
-        });
+        // });
 
         form_title.addEventListener("click", function(e) {
-            var form_content = document.querySelector('#form > .section_content');
+            var form_content = document.querySelector('#section_form > .section_content');
             form_content.classList.toggle('hide');
 
         });
     }
 
     function handlePhotoSection(e) {
-        var photo_content = document.querySelector('#photos > .section_content');
+        var photo_content = document.querySelector('#section_photos > .section_content');
         photo_content.classList.toggle('hide');
     }
 
@@ -49,7 +49,7 @@ define(['form-navigator'], function(FormNavigator) {
         send.addEventListener('click', sendFiles, false);
         map.addEventListener('click', function(e) {
             var location = document.getElementById('location');
-            var images = document.querySelector('#images');
+            var images = document.querySelector('#section_photos > .section_content');
             location.classList.remove('hide');
             camera.classList.remove('hide');
             map.classList.add('hide');
@@ -57,7 +57,7 @@ define(['form-navigator'], function(FormNavigator) {
         });
         camera.addEventListener('click', function(e) {
             var location = document.getElementById('location');
-            var images = document.querySelector('#images');
+            var images = document.querySelector('#section_photos > .section_content');
             location.classList.add('hide');
             camera.classList.add('hide');
             map.classList.remove('hide');
@@ -90,7 +90,7 @@ define(['form-navigator'], function(FormNavigator) {
             alert("Selected file is not an image.");
             return;
         }
-        var images = document.querySelector('#images');
+        var images = document.querySelector('#section_photos > .section_content');
 
         var reader = new FileReader();
         reader.onload = function(e) {
@@ -106,7 +106,8 @@ define(['form-navigator'], function(FormNavigator) {
     function getFormData() {
         var form = document.querySelector('form');
         var formData = new FormData(form);
-        var images = document.querySelectorAll('#images>img');
+        var images = document.querySelectorAll('#section_photos .section_content > img');
+
         Array.prototype.forEach.call(images, function(el) {
             var file = el.File;
             console.log(file);
@@ -117,7 +118,7 @@ define(['form-navigator'], function(FormNavigator) {
 
     // Add add to the top banner
     function addImageFromFile(url, file) {
-        var container = document.getElementById('images');
+        var container = document.querySelector('#section_photos > .section_content');
         var el = document.createElement('img');
         el.src = url;
         el.File = file;
@@ -133,7 +134,7 @@ define(['form-navigator'], function(FormNavigator) {
 
     // Remove selected images from the top banner
     function removeSelectedImages() {
-        var container = document.getElementById('images');
+        var container = document.querySelector('#section_photos > .section_content');
         var images = container.querySelectorAll('img.selected');
         Array.prototype.forEach.call(images, function(el) {
             container.removeChild(el);

@@ -2,14 +2,50 @@
 @import './form-navigator.css';
 
 body {
-    background-color: #FFF;
     font-family: sans-serif;
+    position: relative;
+}
+
+header, footer {
+    position: absolute;
+    height: 49px;
+    width:100%;
+    padding: 8px;
+    background-color: #FFC107;
+    opacity: 0.87;
+}
+
+header {
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid #AAA;
+}
+
+footer {
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #AAA;
 }
 
 main {
-    overflow: auto;
-    white-space: nowrap;
-    height: 100%;
+    position: absolute;
+    overflow-y: auto;
+    top: 49px;
+    bottom: 49px;
+    width: 100%;
+}
+
+.section_title {
+    padding: 2px 8px;
+    background-color: #2979FF;
+    height: 32px;
+    border-bottom: 1px solid #AAA;
+    opacity: 0.72;
+    font-size: 20px;
+    font-family: arial, helvetica;
+}
+
+.section_content {
 }
 
 h1 {
@@ -20,58 +56,17 @@ h1 {
     text-transform: uppercase;
 }
 
-.buttons, #navigation > div {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
+.buttons {
     padding: 0.5em;
-    transform: translate(0%, -50%);
-}
-
-.image-selection {
-    background-color: #FFF;
-    border-top: 1px solid #AAA;
-    height: 25%;
-    margin-bottom: 0.5em;
-    overflow: auto;
-    white-space: nowrap;
-    position: relative;
-}
-
-#images {
-    height: 98%;
-    width: 100%;
-    position: absolute;
 }
 
 img {
-    height: 100%;
-    padding-right: 2px;
-}
-
-img:last-child {
-    padding-right: 0;
-}
-
-.data-entry {
-    background-color: #FFF;
-    border-top: 1px solid #AAA;
-    height: auto;
-    padding: 0.5em;
-}
-
-#navigation, .data-submit {
-    background-color: #FFF;
-    border: 1px solid #AAA;
-    height: 4em;
-    padding: 0.5em;
-    margin-bottom: 0.5em;
-    position: relative;
+    padding: 3px;
+    height: 100px;
 }
 
 .disabled {
-    background-color: #ccc;
+    opacity: 0.26;
 }
 
 .hide {
