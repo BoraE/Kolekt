@@ -27,7 +27,7 @@
         "build:js": "npm run jshint",
 
         "stylus": "stylus public/styl/*.styl -o public/css",
-        "jshint": "jshint **/*.js --exclude-path .gitignore",
+        "jshint": "jshint . --exclude-path .gitignore",
         "html": ""
     }
 }

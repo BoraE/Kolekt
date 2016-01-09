@@ -1,6 +1,15 @@
-define(['form-navigator'], function(FormNavigator) {
+define(['form-navigator', 'Button'], function(FormNavigator, Button) {
+
+    var sendButton;
+    var loginButton;
+    var deleteButton;
+
     function initialize() {
         console.log('Loading app.js...');
+        sendButton = new Button('#send');
+        loginButton = new Button('#login');
+        deleteButton = new Button('#delete');
+
         setup();
         setup2();
     }
@@ -37,16 +46,17 @@ define(['form-navigator'], function(FormNavigator) {
         var camera = document.querySelector('#camera');
         var map = document.querySelector('#map');
         var add = document.querySelector('#add');
-        var del = document.querySelector('#del');
 
         var input = document.querySelector('input[type=file]');
-        var send = document.querySelector('#send');
 
         add.addEventListener('click', function(e) {input.click();}, false);
-        del.addEventListener('click', function(e) {removeSelectedImages();} , false);
         input.addEventListener('change', handleFiles, false);
 
-        send.addEventListener('click', sendFiles, false);
+        sendButton.addEventListener('click', sendFiles);
+        deleteButton.addEventListener('click', removeSelectedImages);
+        loginButton.setEnabled(false);
+        deleteButton.setEnabled(false);
+
         map.addEventListener('click', function(e) {
             var location = document.getElementById('location');
             var images = document.querySelector('#section_photos > .section_content');
@@ -126,7 +136,7 @@ define(['form-navigator'], function(FormNavigator) {
             var selected;
             e.target.classList.toggle('selected');
             selected = container.querySelectorAll('img.selected');
-            document.getElementById('del').disabled = (selected.length === 0);
+            deleteButton.setEnabled(selected.length > 0);
         });
         container.appendChild(el);
         container.classList.remove('disabled');
@@ -143,7 +153,7 @@ define(['form-navigator'], function(FormNavigator) {
         if (container.querySelectorAll('img').length === 0) {
             container.classList.add('disabled');
         }
-        document.getElementById('del').disabled = true;
+        deleteButton.setEnabled(false);
     }
 
     return {initialize: initialize};
