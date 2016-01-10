@@ -8,7 +8,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <title>Kolekt</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/styles.css">
   </head>
 
@@ -27,27 +26,22 @@
 
     <main>
       <section id="section_photos">
-        <div class="section_title">Photos</div>
-        <div class="section_content" class="disabled">
+        <div class="section_title"><span>Photos</span></div>
+        <div class="section_content">
+          <input type="file" accept="image/*">
           <div class="button" id="add_photo"></div>
-          <div id="location" class="hide"></div>
-        </div>
-
-        <input type="file" accept="image/*">
-        <div class="buttons">
-          <button id="camera" class="hide"><i class="material-icons">camera_alt</i></button>
-          <button id="map"><i class="material-icons">add_location</i></button>
-          <button id="add"><i class="material-icons">add</i></button>
         </div>
       </section>
 
-      <section id="map">
-        <div class="section_title">Map</div>
-        <div class="section_content"></div>
+      <section id="section_map">
+        <div class="section_title"><span>Map</span></div>
+        <div class="section_content">
+          <div class="button" id="add"></div>
+        </div>
       </section>
 
       <section id="section_form">
-        <div class="section_title">Data</div>
+        <div class="section_title"><span>Data</span></div>
         <div class="section_content">
           <form class="form">
             <label for="first_name">First name:</label><br>

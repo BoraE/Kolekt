@@ -19,7 +19,7 @@
     },
     "scripts": {
         "start": "node app.js",
-        "watch": "nodemon -w . -e html,js,styl -x 'npm run build'",
+        "watch": "nodemon -w . -e js -x 'npm run build:js'",
 
         "build": "npm run build:css && npm run build:js && npm run build:html",
         "build:css": "npm run stylus",
