@@ -23,8 +23,8 @@
 
         "build": "npm run build:css && npm run build:js && npm run build:html",
         "build:css": "npm run stylus",
-        "build:html": "npm run html",
         "build:js": "npm run jshint",
+        "build:html": "npm run html",
 
         "stylus": "stylus public/styl/*.styl -o public/css",
         "jshint": "jshint . --exclude-path .gitignore",

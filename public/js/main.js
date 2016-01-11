@@ -3,7 +3,7 @@ require.config({
     urlArgs: "bust=" + (new Date()).getTime()
 });
 
-require(['app'], function(App) {
+require(['App'], function(App) {
     console.log('Initializing the app...');
-    App.initialize();
+    var app = new App();
 });

@@ -7,7 +7,7 @@ const http = require('http');
 class Server {
     constructor(opts) {
         opts = opts || {};
-        this.port = opts.port || 8124;
+        this.port = opts.port || 8080;
         this.startServer();
     }
 
