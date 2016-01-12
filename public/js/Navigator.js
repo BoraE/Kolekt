@@ -10,11 +10,13 @@ define(['Button'], function(Button) {
 
     Navigator.prototype.initialize = function() {
         this.sendButton.addEventListener('click', sendFiles.bind(this));
-        this.loginButton.setEnabled(false);
+        this.loginButton.addEventListener('click', requestLogin.bind(this));
     };
 
-    Navigator.prototype.sendForm = function() {
-    };
+    function requestLogin(e) {
+        var loginDialog = document.querySelector('#login_dialog');
+        loginDialog.classList.toggle('hide');
+    }
 
     function sendFiles(e) {
         /*jshint validthis:true */

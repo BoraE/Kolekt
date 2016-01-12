@@ -45,7 +45,7 @@ class FormSerializer {
 
         form.on('close', function() {
             var suffix = ',\n';
-            var filePath = self.uploadDir+'/'+self.dataFile;
+            var filePath = self.uploadDir + '/' + self.dataFile;
             fs.appendFile(filePath, JSON.stringify(data)+suffix, function(err) {
                 if (err) {
                     console.log('Could not store for data', data);

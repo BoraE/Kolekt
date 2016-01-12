@@ -36,7 +36,7 @@ define(['form-navigator', 'Button', 'PhotosController', 'Navigator'], function(F
 
     // Construct form data to be sent over to the server
     App.prototype.getFormData = function() {
-        var form = document.querySelector('form');
+        var form = document.querySelector('.form');
         var formData = new FormData(form);
 
         var files = this.photosController.getImageFiles();
