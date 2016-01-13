@@ -40,7 +40,7 @@ class FormSerializer {
         });
 
         form.on('error', function(err) {
-            self.emit('error', err.statusCode);
+            self.emit('error', err);
         });
 
         form.on('close', function() {

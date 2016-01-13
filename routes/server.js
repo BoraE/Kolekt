@@ -26,9 +26,13 @@ class Server {
             form.on('complete', function(status) {
                 res.status(status).send('OK');
             });
-            form.on('error', function(status, message) {
-                console.log(message);
-                res.status(status).send('Error');
+            form.on('error', function(err) {
+                console.log(err);
+                if (err.statusCode) {
+                    res.status(err.statusCode).send('Error');
+                } else {
+                    res.status('505').send('Unknown error');
+                }
             });
             form.serialize(req);
         });

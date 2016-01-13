@@ -33,7 +33,7 @@ define(['Button'], function(Button) {
                     }
                 }
             } catch(e) {
-                alert('An error occurred. ' + e.description);
+                alert('An error occurred. ' + e);
             }
         }
     }
