@@ -1,5 +1,8 @@
-@import './resets.css';
-@import './form-navigator.css';
+@import './resets.styl';
+@import './login.styl';
+@import './form-navigator.styl';
+
+@require './variables.styl';
 
 body {
     font-family: sans-serif;
@@ -8,10 +11,10 @@ body {
 
 header, footer {
     position: absolute;
-    height: 49px;
+    height: $bar-height;
     width:100%;
     padding: 8px;
-    background-color: #FFC107;
+    background-color: $bar-color;
     opacity: 0.87;
 }
 
@@ -30,32 +33,10 @@ footer {
 main {
     position: absolute;
     overflow-y: auto;
-    top: 49px;
-    bottom: 49px;
+    top: $bar-height;
+    bottom: $bar-height;
     width: 100%;
 }
-
-
-#login_dialog {
-    font-family: arial, helvetica;
-    position: fixed;
-    top: 49px;
-    bottom: 49px;
-    width: 100%;
-    background-color: rgba(100,100,100,0.87);
-    z-index: 1;
-}
-
-#login_form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid #AAA;
-    padding: 30px;
-    background-color: #15A;
-}
-
 
 .section_title {
     padding: 2px 8px;
