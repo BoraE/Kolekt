@@ -14,6 +14,8 @@ class Server {
     startServer() {
         var app = express();
         var server = http.Server(app);
+        var io = require('socket.io')(server);
+
         var self = this;
 
         server.listen(this.port, function() {
@@ -39,6 +41,18 @@ class Server {
 
         // Serve static files from public directory
         app.use(express.static(__dirname + '/../public/'));
+
+        // Wait for socket connection
+        io.on('connection', function (socket) {
+            socket.on('login', function (data) {
+                console.log(data);
+                socket.emit('loginResponse', {username: data.username, token:'dad53sdfsdf'});
+            });
+
+            socket.on('disconnect', function () {
+                io.emit('user disconnected');
+            });
+        });
     }
 }
 
