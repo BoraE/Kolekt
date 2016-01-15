@@ -2,8 +2,19 @@ define(['form-navigator', 'Button', 'PhotosController', 'Navigator'], function(F
     'use strict';
 
     function App() {
+        this.startSocket();
         this.initialize();
     }
+
+    App.prototype.startSocket = function() {
+        this.socket = io.connect(window.location.host);
+        console.log('Starting socket connection');
+        this.socket.on('loginResponse', function (data) {
+            console.log('Authorization data:', data);
+            // Save token if valid data. You are now logged in.
+            // Use token with every server communication.
+        });
+    };
 
     App.prototype.initialize = function() {
         console.log('Loading app.js...');
@@ -14,6 +25,17 @@ define(['form-navigator', 'Button', 'PhotosController', 'Navigator'], function(F
 
         this.photosController = new PhotosController('#section_photos');
         this.navigator = new Navigator(this);
+
+        var self = this;
+        this.loginSubmitButton =document.querySelector('#login_form input[type=button]');
+        this.loginSubmitButton.addEventListener('click', function(e) {
+            // Fetch form data and send login information
+            self.socket.emit('login', {
+                username: document.querySelector('#username').value,
+                password: document.querySelector('#password').value,
+                remember: document.querySelector('input[name=remember]').checked
+            });
+        });
 
         var map_title = document.querySelector('#section_map > .section_title');
         var form_title = document.querySelector('#section_form > .section_title');

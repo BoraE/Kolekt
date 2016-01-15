@@ -44,12 +44,14 @@ class Server {
 
         // Wait for socket connection
         io.on('connection', function (socket) {
+            console.log('Socket connection established.');
             socket.on('login', function (data) {
                 console.log(data);
                 socket.emit('loginResponse', {username: data.username, token:'dad53sdfsdf'});
             });
 
             socket.on('disconnect', function () {
+                console.log('Socket disconnected.');
                 io.emit('user disconnected');
             });
         });
