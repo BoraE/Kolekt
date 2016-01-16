@@ -55,40 +55,58 @@
         <div class="section_title"><span>Data</span></div>
         <div class="section_content">
           <form class="form">
-            <label for="first_name">First name:</label><br>
-            <input type="text" id="first_name" name="first_name">
+            <label>Surface:</label>
             <br>
-            <label for="last_name">Last name:</label><br>
-            <input type="text" id="last_name" name="last_name">
-            <br><br>
-
-            <label>Gender:</label><br>
-            <input type="radio" name="gender" value="male" checked>Male<br>
-            <input type="radio" name="gender" value="female">Female
-            <br><br>
-
-            <label>Subjects:</label><br>
-            <input type="checkbox" name="subjects" value="maths">Maths<br>
-            <input type="checkbox" name="subjects" value="physics">Physics<br>
-            <input type="checkbox" name="subjects" value="chemistry">Chemistry<br>
-            <input type="checkbox" name="subjects" value="english">English<br>
-            <input type="checkbox" name="subjects" value="philosophy">Philosophy<br>
-            <input type="checkbox" name="subjects" value="arts">Arts<br>
-            <input type="checkbox" name="subjects" value="writing">Writing<br>
-            <input type="checkbox" name="subjects" value="cinema">Cinema<br>
-            <br><br>
-
-            <label>Location:</label>
-            <br>
-            <select name="location">
-              <option value="Boston" selected>Boston</option>
-              <option value="Providence">Providence</option>
+            <select name="surface">
+              <option value="curb">Curb</option>
+              <option value="electrical_box">Electrical Box</option>
+              <option value="gas_meter">Gas Meter</option>
+              <option value="gate">Gate</option>
+              <option value="pipe">Pipe</option>
+              <option value="sidewalk">Sidewalk</option>
+              <option value="street_sign">Street Sign (incl. post)</option>
+              <option value="utility_pole">Utility Pole</option>
+              <option value="wall">Wall</option>
+              <option value="other">Other</option>
             </select>
             <br><br>
 
-            <label for="quantity">Quantity (between 1 and 5):</label><br>
+            <label for="other_surface">Other (Surface):</label><br>
+            <input type="text" id="other_surface" name="other_surface" disabled="true">
+            <br><br>
+
+            <label for="quantity">Number of graffiti:</label><br>
+            <input type="number" id="quantity" name="quantity" length="5" value="1" min="1">
+            <br><br>
+
+            <label>Form:</label>
             <br>
-            <input type="number" id="quantity" name="quantity" length="5" value="2" min="1" max="5">
+            <select name="form" multiple>
+              <option value="piece">Piece</option>
+              <option value="slap_tag">Slap Tag</option>
+              <option value="tag">Tag</option>
+              <option value="throw_up">Throw-up</option>
+              <option value="other">Other</option>
+            </select>
+            <br><br>
+
+            <label for="other_form">Other (Form):</label><br>
+            <input type="text" id="other_form" name="other_form" disabled="true">
+            <br><br>
+
+            <label>Category:</label>
+            <br>
+            <select name="category" multiple>
+              <option value="gang">Gang</option>
+              <option value="non_gang">Non-gang</option>
+              <option value="personal_statement">Personal/Political Statement</option>
+              <option value="street_art">Street Art</option>
+              <option value="other">Other</option>
+            </select>
+            <br><br>
+
+            <label for="other_category">Other (Category):</label><br>
+            <input type="text" id="other_category" name="other_category" disabled="true">
             <br><br>
           </form>
         </div>

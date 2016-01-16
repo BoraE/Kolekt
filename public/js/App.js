@@ -20,14 +20,12 @@ define(['form-navigator', 'Button', 'PhotosController', 'Navigator'], function(F
         console.log('Loading app.js...');
         this.deleteButton = new Button('#delete');
 
-        var fn = new FormNavigator();
-        fn.placeAt('#navigation');
-
+        this.formController = new FormNavigator("#section_form");
         this.photosController = new PhotosController('#section_photos');
         this.navigator = new Navigator(this);
 
         var self = this;
-        this.loginSubmitButton =document.querySelector('#login_form input[type=button]');
+        this.loginSubmitButton = document.querySelector('#login_form input[type=button]');
         this.loginSubmitButton.addEventListener('click', function(e) {
             // Fetch form data and send login information
             self.socket.emit('login', {
@@ -38,18 +36,11 @@ define(['form-navigator', 'Button', 'PhotosController', 'Navigator'], function(F
         });
 
         var map_title = document.querySelector('#section_map > .section_title');
-        var form_title = document.querySelector('#section_form > .section_title');
 
         map_title.addEventListener("click", function(e) {
             var map_content = document.querySelector('#section_map > .section_content');
             map_content.classList.toggle('hide');
             map_title.classList.toggle('collapsed');
-        });
-
-        form_title.addEventListener("click", function(e) {
-            var form_content = document.querySelector('#section_form > .section_content');
-            form_content.classList.toggle('hide');
-            form_title.classList.toggle('collapsed');
         });
 
         this.deleteButton.addEventListener('click', this.photosController.removeSelectedImages);
