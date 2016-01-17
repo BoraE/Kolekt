@@ -23,21 +23,25 @@ define([], function() {
     };
 
     function handleFormSection(e) {
+        /*jshint validthis:true */
         this.title.classList.toggle('collapsed');
         this.content.classList.toggle('hide');
     }
 
     function handleSurface(e) {
+        /*jshint validthis:true */
         var surface_other = this.content.querySelector('#other_surface');
         surface_other.disabled = (e.target.value !== 'other');
     }
 
     function handleForm(e) {
+        /*jshint validthis:true */
         var form_other = this.content.querySelector('#other_form');
         form_other.disabled = !e.target.options[e.target.options.length-1].selected;
     }
 
     function handleCategory(e) {
+        /*jshint validthis:true */
         var category_other = this.content.querySelector('#other_category');
         category_other.disabled = !e.target.options[e.target.options.length-1].selected;
     }

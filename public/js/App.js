@@ -1,4 +1,4 @@
-define(['form-navigator', 'Button', 'PhotosController', 'Navigator'], function(FormNavigator, Button, PhotosController, Navigator) {
+define(['form-navigator', 'Button', 'PhotosController', 'MapController', 'Navigator'], function(FormNavigator, Button, PhotosController, MapController, Navigator) {
     'use strict';
 
     function App() {
@@ -21,6 +21,7 @@ define(['form-navigator', 'Button', 'PhotosController', 'Navigator'], function(F
         this.deleteButton = new Button('#delete');
 
         this.formController = new FormNavigator("#section_form");
+        this.mapController = new MapController("#section_map");
         this.photosController = new PhotosController('#section_photos');
         this.navigator = new Navigator(this);
 
@@ -33,14 +34,6 @@ define(['form-navigator', 'Button', 'PhotosController', 'Navigator'], function(F
                 password: document.querySelector('#password').value,
                 remember: document.querySelector('input[name=remember]').checked
             });
-        });
-
-        var map_title = document.querySelector('#section_map > .section_title');
-
-        map_title.addEventListener("click", function(e) {
-            var map_content = document.querySelector('#section_map > .section_content');
-            map_content.classList.toggle('hide');
-            map_title.classList.toggle('collapsed');
         });
 
         this.deleteButton.addEventListener('click', this.photosController.removeSelectedImages);
