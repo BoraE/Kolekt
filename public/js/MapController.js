@@ -19,8 +19,8 @@ define([], function() {
     MapController.prototype.addMap = function() {
         // Initialize the map
         var mapOptions = {
+            center: {lat: 42.35, lng: -71.12},
             zoom: 16,
-            center: new google.maps.LatLng(42.35, -71.12),
             streetViewControl: false,
             mapTypeControlOptions: {
                 mapTypeIds: [google.maps.MapTypeId.ROADMAP]
@@ -28,8 +28,8 @@ define([], function() {
         };
         this.map = new google.maps.Map(this.content, mapOptions);
         this.marker = new google.maps.Marker({
-            position: mapOptions.center,
-            map: this.map
+            map: this.map,
+            position: mapOptions.center
         });
     };
 
