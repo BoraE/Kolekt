@@ -47,7 +47,11 @@ class Server {
             console.log('Socket connection established.');
             socket.on('login', function (data) {
                 console.log(data);
-                socket.emit('loginResponse', {username: data.username, token:'dad53sdfsdf'});
+                if (data.username && data.password) { // Need real login validation here
+                    socket.emit('loginResponse', {username: data.username, token:'dad53sdfsdf'});
+                } else {
+                    socket.emit('loginResponse', {error: 'Invalid username or password'});
+                }
             });
 
             socket.on('disconnect', function () {

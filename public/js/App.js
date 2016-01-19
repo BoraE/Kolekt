@@ -11,8 +11,12 @@ define(['form-navigator', 'Button', 'PhotosController', 'MapController', 'Naviga
         console.log('Starting socket connection');
         this.socket.on('loginResponse', function (data) {
             console.log('Authorization data:', data);
-            // Save token if valid data. You are now logged in.
-            // Use token with every server communication.
+            if (data.error) {
+                alert(data.error);
+            } else {
+                // Save token if valid data. You are now logged in.
+                // Use token with every server communication.
+            }
         });
     };
 
@@ -24,17 +28,6 @@ define(['form-navigator', 'Button', 'PhotosController', 'MapController', 'Naviga
         this.mapController = new MapController("#section_map");
         this.photosController = new PhotosController('#section_photos');
         this.navigator = new Navigator(this);
-
-        var self = this;
-        this.loginSubmitButton = document.querySelector('#login_form input[type=button]');
-        this.loginSubmitButton.addEventListener('click', function(e) {
-            // Fetch form data and send login information
-            self.socket.emit('login', {
-                username: document.querySelector('#username').value,
-                password: document.querySelector('#password').value,
-                remember: document.querySelector('input[name=remember]').checked
-            });
-        });
 
         this.deleteButton.addEventListener('click', this.photosController.removeSelectedImages);
         this.deleteButton.setEnabled(false);
