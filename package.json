@@ -9,6 +9,7 @@
     "type": "git",
     "url": "https://github.com/BoraE/Kolekt.git"
   },
+  "license": "MIT",
   "devDependencies": {
     "jshint": "^2.8.0",
     "stylus": "^0.53.0"
