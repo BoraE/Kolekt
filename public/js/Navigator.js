@@ -11,8 +11,13 @@ define(['Button'], function(Button) {
 
     Navigator.prototype.initialize = function() {
         this.sendButton.addEventListener('click', sendFiles.bind(this));
+        this.sendButton.setEnabled(false);
         this.loginButton.addEventListener('click', requestLogin.bind(this));
         this.submitButton.addEventListener('click', submitLogin.bind(this));
+    };
+
+    Navigator.prototype.setSubmitEnabled = function(enabled) {
+        this.sendButton.setEnabled(enabled);
     };
 
     function submitLogin(e) {
@@ -34,6 +39,10 @@ define(['Button'], function(Button) {
 
     function sendFiles(e) {
         /* jshint validthis:true */
+        if (!this.sendButton.isEnabled()) {
+            return;
+        }
+
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = handleRequest;
         xhr.open('POST', '/data', true);

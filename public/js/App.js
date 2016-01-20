@@ -2,22 +2,14 @@ define(['form-navigator', 'Button', 'PhotosController', 'MapController', 'Naviga
     'use strict';
 
     function App() {
-        this.startSocket();
         this.initialize();
+        this.startSocket();
     }
 
     App.prototype.startSocket = function() {
         this.socket = io.connect(window.location.host);
         console.log('Starting socket connection');
-        this.socket.on('loginResponse', function (data) {
-            console.log('Authorization data:', data);
-            if (data.error) {
-                alert(data.error);
-            } else {
-                // Save token if valid data. You are now logged in.
-                // Use token with every server communication.
-            }
-        });
+        this.socket.on('loginResponse', socketHandler.bind(this));
     };
 
     App.prototype.initialize = function() {
@@ -45,6 +37,19 @@ define(['form-navigator', 'Button', 'PhotosController', 'MapController', 'Naviga
         });
         return formData;
     };
+
+    function socketHandler(data) {
+        /* jshint validthis:true */
+        console.log('Authorization data:', data);
+        if (data.error) {
+            alert(data.error);
+            this.navigator.setSubmitEnabled(false);
+        } else {
+            // Save token if valid data. You are now logged in.
+            // Use token with every server communication.
+            this.navigator.setSubmitEnabled(true);
+        }
+    }
 
     return App;
 });

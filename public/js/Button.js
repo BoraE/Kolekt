@@ -13,6 +13,10 @@ define([], function() {
         }
     };
 
+    Button.prototype.isEnabled = function() {
+        return !this.domNode.classList.contains('disabled');
+    };
+
     Button.prototype.addEventListener = function(eventName, callback) {
         this.domNode.addEventListener(eventName, callback, false);
     };
