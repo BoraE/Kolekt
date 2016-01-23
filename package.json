@@ -1,33 +1,35 @@
 {
-  "name": "Kolekt",
-  "version": "0.0.1",
-  "description": "Mobile data collection tool",
-  "author": {
-    "name": "Bora Eryilmaz"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BoraE/Kolekt.git"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "jshint": "^2.8.0",
-    "stylus": "^0.53.0"
-  },
-  "dependencies": {
-    "express": "^4.13.3",
-    "multiparty": "^4.1.2",
-    "socket.io": "^1.4.4"
-  },
-  "scripts": {
-    "start": "node app.js",
-    "watch": "nodemon -w . -e js -x 'npm run build:js'",
-    "build": "npm run build:css && npm run build:js && npm run build:html",
-    "build:css": "npm run stylus",
-    "build:js": "npm run jshint",
-    "build:html": "npm run html",
-    "stylus": "stylus public/styl/*.styl -o public/css",
-    "jshint": "jshint . --exclude-path .gitignore",
-    "html": ""
-  }
+    "name": "Kolekt",
+    "version": "0.0.1",
+    "description": "Mobile data collection tool",
+    "author": {
+        "name": "Bora Eryilmaz"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/BoraE/Kolekt.git"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "jshint": "^2.8.0",
+        "stylus": "^0.53.0"
+    },
+    "dependencies": {
+        "express": "^4.13.3",
+        "multiparty": "^4.1.2",
+        "socket.io": "^1.4.4"
+    },
+    "scripts": {
+        "start": "node app.js",
+        "watch": "nodemon -w . -e js,styl -x 'npm run build'",
+
+        "build": "npm run build:css && npm run build:js",
+        "build:css": "npm run stylus",
+        "build:js": "npm run jshint",
+        "build:html": "npm run html",
+
+        "stylus": "stylus -c public/styl/*.styl -o public/css",
+        "jshint": "jshint . --exclude-path .gitignore",
+        "html": ""
+    }
 }

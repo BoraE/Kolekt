@@ -2,7 +2,6 @@
 
 ## Installation
 
-## Usage
 Clone the Kolekt repository:
 ```
 $ git clone https://github.com/BoraE/Kolekt
@@ -12,6 +11,8 @@ Install dependencies:
 ```
 $ npm install
 ```
+
+## Usage
 
 Start the server:
 ```

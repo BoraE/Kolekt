@@ -49,13 +49,13 @@ define(['Button'], function(Button) {
     };
 
     function handlePhotoSection(e) {
-        /*jshint validthis:true */
+        /* jshint validthis:true */
         this.title.classList.toggle('collapsed');
         this.content.classList.toggle('hide');
     }
 
     function handleFiles(e) {
-        /*jshint validthis:true */
+        /* jshint validthis:true */
         var file = e.target.files[0];
         if (file.type.search('image/*') == -1) {
             alert("Selected file is not an image.");
