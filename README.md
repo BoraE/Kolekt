@@ -12,6 +12,11 @@ Install dependencies:
 $ npm install
 ```
 
+Build Stylus files
+```
+$ npm run build
+```
+
 ## Usage
 
 Start the server:
