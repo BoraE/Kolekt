@@ -12,7 +12,7 @@ Install dependencies:
 $ npm install
 ```
 
-Build Stylus files
+Build Stylus files:
 ```
 $ npm run build
 ```
