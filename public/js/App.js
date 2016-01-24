@@ -44,10 +44,12 @@ define(['form-navigator', 'Button', 'PhotosController', 'MapController', 'Naviga
         if (data.error) {
             alert(data.error);
             this.navigator.setSubmitEnabled(false);
+            this.navigator.setLoginMode('login');
         } else {
             // Save token if valid data. You are now logged in.
             // Use token with every server communication.
             this.navigator.setSubmitEnabled(true);
+            this.navigator.setLoginMode('logout');
         }
     }
 

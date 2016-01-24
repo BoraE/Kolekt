@@ -6,6 +6,7 @@ define(['Button'], function(Button) {
         this.sendButton = new Button('#send');
         this.loginButton = new Button('#login');
         this.submitButton = new Button('#login_form input[type=button]');
+        this.logoutButton = new Button('#logout_form input[type=button]');
         this.initialize();
     }
 
@@ -14,11 +15,30 @@ define(['Button'], function(Button) {
         this.sendButton.setEnabled(false);
         this.loginButton.addEventListener('click', requestLogin.bind(this));
         this.submitButton.addEventListener('click', submitLogin.bind(this));
+        this.logoutButton.addEventListener('click', submitLogout.bind(this));
     };
 
     Navigator.prototype.setSubmitEnabled = function(enabled) {
         this.sendButton.setEnabled(enabled);
     };
+
+    Navigator.prototype.setLoginMode = function(mode) {
+        if (mode === 'login') {
+            document.querySelector('#login_form').classList.remove('hide');
+            document.querySelector('#logout_form').classList.add('hide');
+        } else if (mode === 'logout') {
+            document.querySelector('#login_form').classList.add('hide');
+            document.querySelector('#logout_form').classList.remove('hide');
+        }
+    };
+
+    function submitLogout(e) {
+        /* jshint validthis:true */
+        this.app.socket.emit('logout', {
+            username: document.querySelector('#username').value
+        });
+        document.querySelector('#login_dialog').classList.add('hide');
+    }
 
     function submitLogin(e) {
         /* jshint validthis:true */
