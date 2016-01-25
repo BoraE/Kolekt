@@ -7,6 +7,7 @@ define(['Button'], function(Button) {
         this.loginButton = new Button('#login');
         this.submitButton = new Button('#login_form input[type=button]');
         this.logoutButton = new Button('#logout_form input[type=button]');
+        this.deleteButton = new Button('#delete');
         this.initialize();
     }
 
@@ -16,6 +17,7 @@ define(['Button'], function(Button) {
         this.loginButton.addEventListener('click', requestLogin.bind(this));
         this.submitButton.addEventListener('click', submitLogin.bind(this));
         this.logoutButton.addEventListener('click', submitLogout.bind(this));
+        this.deleteButton.addEventListener('click', deleteImage.bind(this));
     };
 
     Navigator.prototype.setSubmitEnabled = function(enabled) {
@@ -31,6 +33,15 @@ define(['Button'], function(Button) {
             document.querySelector('#logout_form').classList.remove('hide');
         }
     };
+
+    function deleteImage(e) {
+        /* jshint validthis:true */
+        // if (!this.deleteButton.isEnabled()) {
+        //     return;
+        // }
+        this.app.photosController.removeSelectedImages();
+        // this.deleteButton.setEnabled(false);
+    }
 
     function submitLogout(e) {
         /* jshint validthis:true */

@@ -12,7 +12,7 @@ define([], function() {
     MapController.prototype.initialize = function() {
         this.title.addEventListener("click", handleMapSection.bind(this), false);
         this.addMap();
-        setInterval(this.updateCurrentPosition.bind(this), 2000);
+        setInterval(this.updateCurrentPosition.bind(this), 4000);
         // google.maps.event.addDomListener(window, 'load', function() {
     };
 
@@ -37,7 +37,10 @@ define([], function() {
         var self = this;
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition( function(position) {
-                var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
                 self.map.setCenter(pos);
                 self.marker.setPosition(pos);
             });

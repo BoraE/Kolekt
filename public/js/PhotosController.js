@@ -12,10 +12,10 @@ define(['Button'], function(Button) {
 
     PhotosController.prototype.initialize = function() {
         var input = this.content.querySelector('input[type=file]');
-        input.addEventListener('change', handleFiles.bind(this), false);
+        input.addEventListener('change', handleFiles.bind(this));
 
         this.addButton.addEventListener('click', function(e) {input.click();});
-        this.title.addEventListener("click", handlePhotoSection.bind(this), false);
+        this.title.addEventListener("click", handlePhotoSection.bind(this));
     };
 
     PhotosController.prototype.addImageFromFile = function(url, file) {
@@ -23,20 +23,17 @@ define(['Button'], function(Button) {
         el.src = url;
         el.File = file;
         el.addEventListener('click', function(e) {
-            var selected;
             e.target.classList.toggle('selected');
-            // selected = this.content.querySelectorAll('img.selected');
-            // deleteButton.setEnabled(selected.length > 0);
         });
         this.content.insertBefore(el, this.addButton.domNode);
     };
 
     PhotosController.prototype.removeSelectedImages = function(url, file) {
         var selected = this.content.querySelectorAll('img.selected');
+        var self = this;
         Array.prototype.forEach.call(selected, function(el) {
-            this.content.removeChild(el);
+            self.content.removeChild(el);
         });
-        // deleteButton.setEnabled(false);
     };
 
     PhotosController.prototype.getImageFiles = function() {
@@ -61,6 +58,7 @@ define(['Button'], function(Button) {
             alert("Selected file is not an image.");
             return;
         }
+        e.target.value = null; // To allow selecting the same image file again
 
         var reader = new FileReader();
         var self = this;
