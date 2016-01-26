@@ -1,7 +1,7 @@
 define([], function() {
     'use strict';
 
-    function FormNavigator(el) {
+    function FormController(el) {
         this.domNode = document.querySelector(el);
         this.title = this.domNode.querySelector('.section_title');
         this.content = this.domNode.querySelector('.section_content');
@@ -9,7 +9,7 @@ define([], function() {
         this.initialize();
     }
 
-    FormNavigator.prototype.initialize = function() {
+    FormController.prototype.initialize = function() {
         this.title.addEventListener("click", handleFormSection.bind(this), false);
 
         var surface = this.content.querySelector('select[name=surface]');
@@ -46,5 +46,5 @@ define([], function() {
         category_other.disabled = !e.target.options[e.target.options.length-1].selected;
     }
 
-    return FormNavigator;
+    return FormController;
 });

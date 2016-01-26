@@ -1,4 +1,4 @@
-define(['form-navigator', 'Button', 'PhotosController', 'MapController', 'Navigator'], function(FormNavigator, Button, PhotosController, MapController, Navigator) {
+define(['Button', 'FormController', 'PhotosController', 'MapController', 'Navigator'], function(Button, FormController, PhotosController, MapController, Navigator) {
     'use strict';
 
     function App() {
@@ -15,7 +15,7 @@ define(['form-navigator', 'Button', 'PhotosController', 'MapController', 'Naviga
     App.prototype.initialize = function() {
         console.log('Loading app.js...');
 
-        this.formController = new FormNavigator("#section_form");
+        this.formController = new FormController("#section_form");
         this.mapController = new MapController("#section_map");
         this.photosController = new PhotosController('#section_photos');
         this.navigator = new Navigator(this);

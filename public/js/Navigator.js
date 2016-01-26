@@ -84,6 +84,8 @@ define(['Button'], function(Button) {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status !== 200) {
                         alert('Image was not uploaded. Please retry.');
+                    } else {
+                        alert('Images and data successfully stored on the server.');
                     }
                 }
             } catch(e) {
