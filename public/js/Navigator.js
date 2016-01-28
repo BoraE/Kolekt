@@ -24,6 +24,14 @@ define(['Button'], function(Button) {
         this.sendButton.setEnabled(enabled);
     };
 
+    Navigator.prototype.getUserName = function() {
+        return this.userData.username;
+    };
+
+    Navigator.prototype.saveUserToken = function(data) {
+        this.userData = data;
+    };
+
     Navigator.prototype.setLoginMode = function(mode) {
         if (mode === 'login') {
             document.querySelector('#login_form').classList.remove('hide');
@@ -45,9 +53,8 @@ define(['Button'], function(Button) {
 
     function submitLogout(e) {
         /* jshint validthis:true */
-        this.app.socket.emit('logout', {
-            username: document.querySelector('#username').value
-        });
+        this.app.socket.emit('logout', this.userData);
+        this.userData = null;
         document.querySelector('#login_dialog').classList.add('hide');
     }
 
@@ -82,10 +89,10 @@ define(['Button'], function(Button) {
         function handleRequest(e) {
             try {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status !== 200) {
-                        alert('Image was not uploaded. Please retry.');
-                    } else {
+                    if (xhr.status === 200) {
                         alert('Images and data successfully stored on the server.');
+                    } else {
+                        alert('Images and data were not uploaded. Please retry.');
                     }
                 }
             } catch(e) {

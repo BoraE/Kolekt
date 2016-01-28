@@ -31,6 +31,9 @@ define(['Button', 'FormController', 'PhotosController', 'MapController', 'Naviga
             console.log(file);
             formData.append(file.name, file);
         });
+        if (this.navigator.getUserName()) {
+            formData.append('username', this.navigator.getUserName());
+        }
         return formData;
     };
 
@@ -44,6 +47,7 @@ define(['Button', 'FormController', 'PhotosController', 'MapController', 'Naviga
         } else {
             // Save token if valid data. You are now logged in.
             // Use token with every server communication.
+            this.navigator.saveUserToken(data);
             this.navigator.setSubmitEnabled(true);
             this.navigator.setLoginMode('logout');
         }
