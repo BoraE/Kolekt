@@ -18,6 +18,11 @@ define(['Button'], function(Button) {
         this.submitButton.addEventListener('click', submitLogin.bind(this));
         this.logoutButton.addEventListener('click', submitLogout.bind(this));
         this.deleteButton.addEventListener('click', deleteImage.bind(this));
+        document.querySelector('#login_form').addEventListener('keypress', function(event) {
+            if (event.keyCode === 13) {
+                document.querySelector('#login_form input[type=button]').click();
+            }
+        });
     };
 
     Navigator.prototype.setSubmitEnabled = function(enabled) {
@@ -51,11 +56,9 @@ define(['Button'], function(Button) {
         // this.deleteButton.setEnabled(false);
     }
 
-    function submitLogout(e) {
-        /* jshint validthis:true */
-        this.app.socket.emit('logout', this.userData);
-        this.userData = null;
-        document.querySelector('#login_dialog').classList.add('hide');
+    function requestLogin(e) {
+        var loginDialog = document.querySelector('#login_dialog');
+        loginDialog.classList.toggle('hide');
     }
 
     function submitLogin(e) {
@@ -70,9 +73,11 @@ define(['Button'], function(Button) {
         document.querySelector('#login_form').reset();
     }
 
-    function requestLogin(e) {
-        var loginDialog = document.querySelector('#login_dialog');
-        loginDialog.classList.toggle('hide');
+    function submitLogout(e) {
+        /* jshint validthis:true */
+        this.app.socket.emit('logout', this.userData);
+        this.userData = null;
+        document.querySelector('#login_dialog').classList.add('hide');
     }
 
     function sendFiles(e) {
