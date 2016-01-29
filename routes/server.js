@@ -1,8 +1,11 @@
 'use strict';
 
 const express = require('express');
-const FS = require('./form-serializer');
+const FormSerializer = require('./FormSerializer');
 const http = require('http');
+const fs = require('fs');
+
+const hashFile = "password_hash.js";
 
 class Server {
     constructor(opts) {
@@ -24,7 +27,7 @@ class Server {
 
         // Handle POST requests
         app.post("/data", function(req, res) {
-            var form = new FS();
+            var form = new FormSerializer();
             form.on('complete', function(status) {
                 res.status(status).send('OK');
             });
@@ -47,11 +50,7 @@ class Server {
             console.log('Socket connection established.');
             socket.on('login', function (data) {
                 console.log(data);
-                if (data.username && data.password) { // Need real login validation here from login-service.js
-                    socket.emit('loginResponse', {username: data.username, token:'dad53sdfsdf'});
-                } else {
-                    socket.emit('loginResponse', {error: 'Invalid username or password.'});
-                }
+                self.validateUser(data, socket);
             });
 
             socket.on('logout', function (data) {
@@ -64,6 +63,27 @@ class Server {
                 io.emit('user disconnected');
             });
         });
+    }
+
+    validateUser(loginData, socket) {
+        fs.readFile(__dirname + "/" + hashFile, (err, hash) => {
+            if (err) throw err;
+            hash = JSON.parse(hash);
+            let userData = hash.find( (userInfo) => {
+                if (loginData.username && (loginData.username === userInfo.username)) {
+                    return true;
+                }
+            });
+            if (userData && loginData.password && this.hashPassword(userData, loginData.password)) {
+                socket.emit('loginResponse', {username: loginData.username, token:'dad53sdfsdf'});
+            } else {
+                socket.emit('loginResponse', {error: 'Invalid username or password.'});
+            }
+        });
+    }
+
+    hashPassword(userData, password) {
+        return (userData.hash === (password + userData.salt));
     }
 }
 
