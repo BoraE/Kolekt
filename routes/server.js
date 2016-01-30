@@ -2,6 +2,7 @@
 
 const express = require('express');
 const FormSerializer = require('./FormSerializer');
+const LoginService = require('./LoginService');
 const http = require('http');
 const fs = require('fs');
 
@@ -27,7 +28,7 @@ class Server {
 
         // Handle POST requests
         app.post("/data", function(req, res) {
-            var form = new FormSerializer();
+            let form = new FormSerializer();
             form.on('complete', function(status) {
                 res.status(status).send('OK');
             });
