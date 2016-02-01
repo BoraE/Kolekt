@@ -22,7 +22,7 @@ class FormSerializer {
 
     serialize(request) {
         var form = new multiparty.Form({uploadDir:this.uploadDir});
-        var data = {};
+        var data = { timestamp: new Date().toISOString() };
         var self = this;
 
         form.on('field', function(name, value) {
