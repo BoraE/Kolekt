@@ -9,7 +9,8 @@ define(['Button', 'FormController', 'PhotosController', 'MapController', 'Naviga
     App.prototype.startSocket = function() {
         this.socket = io.connect(window.location.host);
         console.log('Starting socket connection');
-        this.socket.on('loginResponse', socketHandler.bind(this));
+        this.socket.on('loginResponse', loginHandler.bind(this));
+        this.socket.on('logoutResponse', logoutHandler.bind(this));
     };
 
     App.prototype.initialize = function() {
@@ -37,9 +38,9 @@ define(['Button', 'FormController', 'PhotosController', 'MapController', 'Naviga
         return formData;
     };
 
-    function socketHandler(data) {
+    function loginHandler(data) {
         /* jshint validthis:true */
-        console.log('Authorization data:', data);
+        console.log('Login authorization data:', data);
         if (data.error) {
             alert(data.error);
             this.navigator.setSubmitEnabled(false);
@@ -50,6 +51,21 @@ define(['Button', 'FormController', 'PhotosController', 'MapController', 'Naviga
             this.navigator.saveUserToken(data);
             this.navigator.setSubmitEnabled(true);
             this.navigator.setLoginMode('logout');
+        }
+    }
+
+    function logoutHandler(data) {
+        /* jshint validthis:true */
+        console.log('Logout authorization data:', data);
+        if (data.error) {
+            alert(data.error);
+            this.navigator.setSubmitEnabled(false);
+            this.navigator.setLoginMode('logout');
+        } else {
+            // You are now logged out.
+            alert(data.message);
+            this.navigator.setSubmitEnabled(false);
+            this.navigator.setLoginMode('login');
         }
     }
 

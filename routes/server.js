@@ -4,22 +4,19 @@ const express = require('express');
 const FormSerializer = require('./FormSerializer');
 const LoginService = require('./LoginService');
 const http = require('http');
-const fs = require('fs');
-
-const hashFile = "password_hash.js";
 
 class Server {
     constructor(opts) {
         opts = opts || {};
         this.port = opts.port || 8080;
         this.startServer();
+        this.loginService = new LoginService();
     }
 
     startServer() {
         var app = express();
         var server = http.Server(app);
         var io = require('socket.io')(server);
-
         var self = this;
 
         server.listen(this.port, function() {
@@ -46,17 +43,18 @@ class Server {
         // Serve static files from public directory
         app.use(express.static(__dirname + '/../public/'));
 
-        // Wait for socket connection
+        // Wait for socket connections
         io.on('connection', function (socket) {
             console.log('Socket connection established.');
+
             socket.on('login', function (data) {
                 console.log(data);
-                self.validateUser(data, socket);
+                self.loginService.login(data, socket);
             });
 
             socket.on('logout', function (data) {
                 console.log(data);
-                socket.emit('loginResponse', {error: 'User logged out.'});
+                self.loginService.logout(data, socket);
             });
 
             socket.on('disconnect', function () {
@@ -64,27 +62,6 @@ class Server {
                 io.emit('user disconnected');
             });
         });
-    }
-
-    validateUser(loginData, socket) {
-        fs.readFile(__dirname + "/" + hashFile, (err, hash) => {
-            if (err) throw err;
-            hash = JSON.parse(hash);
-            let userData = hash.find( (userInfo) => {
-                if (loginData.username && (loginData.username === userInfo.username)) {
-                    return true;
-                }
-            });
-            if (userData && loginData.password && this.hashPassword(userData, loginData.password)) {
-                socket.emit('loginResponse', {username: loginData.username, token:'dad53sdfsdf'});
-            } else {
-                socket.emit('loginResponse', {error: 'Invalid username or password.'});
-            }
-        });
-    }
-
-    hashPassword(userData, password) {
-        return (userData.hash === (password + userData.salt));
     }
 }
 
