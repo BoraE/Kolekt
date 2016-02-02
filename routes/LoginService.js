@@ -17,23 +17,27 @@ class LoginService {
             // Validate login if userData is found for the given username
             let username = loginData.username;
             let userData = self.findUserData(username);
+            let responseData;
             if (userData && self.validatePasswordHash(userData, loginData)) {
-                socket.emit('loginResponse', {username: username, token: self.generateToken(username)});
+                responseData = {username: username, token: self.generateToken(username)};
             } else {
-                socket.emit('loginResponse', {username: username, error: 'Login failed.'});
+                responseData = {username: username, error: 'Login failed.'};
             }
+            socket.emit('loginResponse', responseData);
         });
     }
 
     logout(data, socket) {
-        let username = data.username;
         let token = data.token;
+        let username = data.username;
         let userData = this.findUserData(data.username);
+        let responseData;
         if (userData && (token === this.generateToken(username))) {
-            socket.emit('logoutResponse', {username: username, token: token, message: 'User logged out.'});
+            responseData = {username: username, token: token, message: 'User logged out.'};
         } else {
-            socket.emit('logoutResponse', {username: username, error: 'Logout failed.'});
+            responseData = {username: username, error: 'Logout failed.'};
         }
+        socket.emit('logoutResponse', responseData);
     }
 
     findUserData(username) {
