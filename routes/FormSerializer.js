@@ -1,5 +1,4 @@
 'use strict';
-
 const events = require('events');
 const fs = require('fs');
 const multiparty = require('multiparty');
@@ -10,14 +9,6 @@ class FormSerializer {
         this.uploadDir = opts.uploadDir || '../Kolekt-data';
         this.dataFile = opts.dataFile || 'kollect-data.json';
         this.emitter = new events.EventEmitter();
-    }
-
-    on(event, listener) {
-        this.emitter.on(event, listener);
-    }
-
-    emit(event, data) {
-        this.emitter.emit(event, data);
     }
 
     serialize(request) {
@@ -57,6 +48,14 @@ class FormSerializer {
         });
 
         form.parse(request);
+    }
+
+    on(event, listener) {
+        this.emitter.on(event, listener);
+    }
+
+    emit(event, data) {
+        this.emitter.emit(event, data);
     }
 }
 
