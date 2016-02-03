@@ -12,26 +12,22 @@ class FormSerializer {
     }
 
     serialize(request) {
-        var form = new multiparty.Form({uploadDir:this.uploadDir});
-        var data = { timestamp: new Date().toISOString() };
-        var self = this;
+        let form = new multiparty.Form({uploadDir:this.uploadDir});
+        let data = { timestamp: new Date().toISOString() };
+        let self = this;
 
-        form.on('field', function(name, value) {
-            if (data[name] === undefined) {
-                data[name] = [];
-            }
+        form.on('field', (name, value) => {
+            data[name] = data[name] || [];
             data[name].push(value);
         });
 
-        form.on('file', function(name, file) {
-            if (data.files === undefined) {
-                data.files = [];
-            }
+        form.on('file', (name, file) => {
+            data.files = data.files || [];
             data.files.push(file.path);
         });
 
-        form.on('error', function(err) {
-            self.emit('error', err);
+        form.on('error', (err) => {
+            this.emit('error', err);
         });
 
         form.on('close', function() {
@@ -39,7 +35,7 @@ class FormSerializer {
             var filePath = self.uploadDir + '/' + self.dataFile;
             fs.appendFile(filePath, JSON.stringify(data)+suffix, function(err) {
                 if (err) {
-                    console.log('Could not store for data', data);
+                    console.log('Could not store form data', data);
                     throw err;
                 }
                 console.log('Stored form data', data);
