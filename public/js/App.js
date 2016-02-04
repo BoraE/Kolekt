@@ -42,9 +42,9 @@ define(['Button', 'FormController', 'PhotosController', 'MapController', 'Naviga
         /* jshint validthis:true */
         console.log('Login authorization data:', data);
         if (data.error) {
-            alert(data.error);
             this.navigator.setSubmitEnabled(false);
             this.navigator.setLoginMode('login');
+            alert(data.error);
         } else {
             // Save token if valid data. You are now logged in.
             // Use token with every server communication.
@@ -58,14 +58,14 @@ define(['Button', 'FormController', 'PhotosController', 'MapController', 'Naviga
         /* jshint validthis:true */
         console.log('Logout authorization data:', data);
         if (data.error) {
-            alert(data.error);
             this.navigator.setSubmitEnabled(false);
             this.navigator.setLoginMode('logout');
+            alert(data.error);
         } else {
             // You are now logged out.
-            alert(data.message);
             this.navigator.setSubmitEnabled(false);
             this.navigator.setLoginMode('login');
+            alert(data.message);
         }
     }
 

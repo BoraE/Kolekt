@@ -13,7 +13,6 @@ define(['Button'], function(Button) {
 
     Navigator.prototype.initialize = function() {
         this.sendButton.addEventListener('click', sendFiles.bind(this));
-        this.sendButton.setEnabled(false);
         this.loginButton.addEventListener('click', requestLogin.bind(this));
         this.submitButton.addEventListener('click', submitLogin.bind(this));
         this.logoutButton.addEventListener('click', submitLogout.bind(this));
