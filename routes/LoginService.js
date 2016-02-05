@@ -1,16 +1,17 @@
 'use strict';
 const events = require('events');
 const fs = require('fs');
-const hashFile = "password_hash.js";
 
-class LoginService {
-    constructor() {
-        this.emitter = new events.EventEmitter();
+class LoginService extends events.EventEmitter {
+    constructor(opts) {
+        super();
+        opts = opts || {};
+        this.hashFile = opts.hashFile || "password_hash.js";
     }
 
     login(loginData, socket) {
         let self = this;
-        fs.readFile(__dirname + "/" + hashFile, (err, hash) => {
+        fs.readFile(__dirname + "/" + this.hashFile, (err, hash) => {
             if (err) throw err;
             self.hash = JSON.parse(hash);
 
@@ -62,14 +63,6 @@ class LoginService {
 
     generateToken(username) {
         return username + '_' + 'ds231%!#$rer2$rdt21%'; // TODO: Generate a real token.
-    }
-
-    on(event, listener) {
-        this.emitter.on(event, listener);
-    }
-
-    emit(event, data) {
-        this.emitter.emit(event, data);
     }
 }
 

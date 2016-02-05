@@ -3,16 +3,16 @@ const events = require('events');
 const fs = require('fs');
 const multiparty = require('multiparty');
 
-class FormSerializer {
+class FormSerializer extends events.EventEmitter {
     constructor(opts) {
+        super();
         opts = opts || {};
         this.uploadDir = opts.uploadDir || '../Kolekt-data';
         this.dataFile = opts.dataFile || 'kollect-data.json';
-        this.emitter = new events.EventEmitter();
     }
 
     serialize(request) {
-        let form = new multiparty.Form({uploadDir:this.uploadDir});
+        let form = new multiparty.Form({ uploadDir:this.uploadDir });
         let data = { timestamp: new Date().toISOString() };
         let self = this;
 
@@ -33,7 +33,7 @@ class FormSerializer {
         form.on('close', function() {
             var suffix = ',\n';
             var filePath = self.uploadDir + '/' + self.dataFile;
-            fs.appendFile(filePath, JSON.stringify(data)+suffix, function(err) {
+            fs.appendFile(filePath, JSON.stringify(data) + suffix, (err) => {
                 if (err) {
                     console.log('Could not store form data', data);
                     throw err;
@@ -44,14 +44,6 @@ class FormSerializer {
         });
 
         form.parse(request);
-    }
-
-    on(event, listener) {
-        this.emitter.on(event, listener);
-    }
-
-    emit(event, data) {
-        this.emitter.emit(event, data);
     }
 }
 
